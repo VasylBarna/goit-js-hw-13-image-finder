@@ -5,11 +5,11 @@ export default class ApiService {
   constructor() {
     this.searchQuery = '';
     this.pageNumber = 1;
+    this.perPage = 12;
   }
   async searchImages() {
-    const perPage = 12;
     const response = await fetch(
-      `${BASE_URL}/api/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.pageNumber}&per_page=${perPage}&key=${API_KEY}`,
+      `${BASE_URL}/api/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.pageNumber}&per_page=${this.perPage}&key=${API_KEY}`,
     );
     const parsedResponse = await response.json();
     const card = await parsedResponse.hits;
@@ -17,7 +17,7 @@ export default class ApiService {
     return card;
   }
   incrementPage() {
-    this.pageNumber +=1;
+    this.pageNumber += 1;
   }
   resetPage() {
     this.pageNumber = 1;
